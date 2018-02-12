@@ -1,3 +1,4 @@
+
 Example configuration to show how to use the git commit hash as the artifact/image version.
 
 Additionally, I prefix the commit hash with the commit timestamp for better human readability ("20160702-152019.7555485").

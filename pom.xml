@@ -3,8 +3,8 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>de.philipphauer.blog</groupId>
-	<artifactId>versioning-continuous-delivery</artifactId>
+	<groupId>com.stratio.cgc</groupId>
+	<artifactId>my-little-artifact</artifactId>
 	<version>${version.number}</version>
 	<packaging>jar</packaging>
 
@@ -20,7 +20,7 @@
 
 		<!-- IntelliJ grouses the following dynamic properties. Workaround: Settings > Build, Execution, Development > Build Tools > Maven > Runner > Properties. Add git.commit.time and git.commit.id.abbrev with empty value. -->
 		<version.number>${git.commit.time}.${git.commit.id.abbrev}</version.number>
-		<docker.repository.name>phauer/${project.artifactId}</docker.repository.name>
+		<docker.repository.name>cgalisteo/${project.artifactId}</docker.repository.name>
 		<!-- Instead of docker hub, you can use your own registry: -->
 		<!--<docker.repository.name>registry.domain.de/group/${project.artifactId}</docker.repository.name>-->
 	</properties>
@@ -52,7 +52,7 @@
 					</execution>
 				</executions>
 				<configuration>
-					<dateFormat>yyyyMMdd-HHmmss</dateFormat><!--  human-readable part of the version id -->
+					<dateFormat>yyyyMMddHHmmss</dateFormat><!--  human-readable part of the version id -->
 					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
 					<generateGitPropertiesFile>false</generateGitPropertiesFile><!-- somehow necessary. otherwise the variables are not available in the pom -->
 				</configuration>
@@ -64,10 +64,6 @@
 				<version>0.15.9</version>
 				<extensions>true</extensions>
 				<configuration>
-					<authConfig> <!-- or use "docker login" up front to store the credentials on the local machine. -->
-						<username>phauer</username>
-						<password>docker123</password>
-					</authConfig>
 					<images>
 						<image>
 							<name>${docker.repository.name}:${version.number}</name>
